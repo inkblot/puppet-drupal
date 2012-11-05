@@ -43,10 +43,11 @@ define drupal::vhost (
 	}
 
 	apache::vhost { $name:
-		port     => $port,
-		docroot  => $::drupal::params::drupal_path,
-		options  => '+FollowSymLinks',
-		override => 'All',
+		port          => $port,
+		docroot       => $::drupal::params::drupal_path,
+		options       => '+FollowSymLinks',
+		override      => 'All',
+		serveraliases => $serveraliases,
 	}
 
 }
