@@ -1,11 +1,12 @@
 # ex:ts=4 sw=4 tw=72
 
 define drupal::vhost (
-	$port        = '80',
-	$db_name     = $::drupal::params::db_name,
-	$db_user     = $::drupal::params::db_user,
+	$serveraliases = [],
+	$port          = '80',
+	$db_name       = $::drupal::params::db_name,
+	$db_user       = $::drupal::params::db_user,
 	$db_password,
-	$db_server   = $::drupal::params::db_server,
+	$db_server     = $::drupal::params::db_server,
 	$files
 ) {
 	$site_dir = "${drupal::params::drupal_sites}/${name}"
