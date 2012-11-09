@@ -45,7 +45,7 @@ define drupal::site (
 		"${site_dir}/files":
 			ensure  => link,
 			target  => $files,
-			require => Exec["drupal-si-${name}"];
+			require => Exec["drush-si-${name}"];
 
 		$files:
 			ensure => directory,
