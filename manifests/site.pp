@@ -16,17 +16,17 @@ define drupal::site (
 
 	exec { "drush-si-${name}":
 		command => "drush si standard -r ${drupal::params::drupal_path} -l ${name} --site-name=\"${sitename}\" --db-url=mysql://${db_user}:${db_password}@${db_server}/${db_name} --db-su=root --db-su-pw=${drupal::db_root_password} --account-username=${admin_user} --account-password=${admin_password}",
-		creates => $site_dir,
+		creates => "${site_dir}/dbconfig.php",
 		path    => [ '/bin', '/usr/bin', '/sbin', '/usr/sbin' ],
 		require => Package[$::drupal::params::drush_package],
 	}
 
 	file {
-#		$site_dir:
-#			ensure => directory,
-#			owner  => 'root',
-#			group  => 'root',
-#			mode   => '0755';
+		$site_dir:
+			ensure => directory,
+			owner  => 'root',
+			group  => 'root',
+			mode   => '0755';
 
 #		"${site_dir}/dbconfig.php":
 #			ensure  => present,
