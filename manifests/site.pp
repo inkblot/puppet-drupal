@@ -22,11 +22,11 @@ define drupal::site (
 	}
 
 	file {
-		$site_dir:
-			ensure => directory,
-			owner  => 'root',
-			group  => 'root',
-			mode   => '0755';
+#		$site_dir:
+#			ensure => directory,
+#			owner  => 'root',
+#			group  => 'root',
+#			mode   => '0755';
 
 #		"${site_dir}/dbconfig.php":
 #			ensure  => present,
@@ -43,8 +43,9 @@ define drupal::site (
 #			content => template('drupal/settings.php.erb');
 
 		"${site_dir}/files":
-			ensure => link,
-			target => $files;
+			ensure  => link,
+			target  => $files,
+			require => Exec["drupal-si-${name}"];
 
 		$files:
 			ensure => directory,
